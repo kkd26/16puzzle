@@ -10,7 +10,7 @@ function Board({ n, arr }) {
         }
     }
     return (
-        <div className="board" style={style}> {tab} </div>
+        <main className="board" style={style}> {tab} </main>
     );
 }
 

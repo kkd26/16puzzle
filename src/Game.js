@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 import Board from './Board';
 import { swipeDetect } from './swipeDetect';
 import { DIR, constructCorrectArray } from './utils';
+import { FaUndo, FaBars } from 'react-icons/fa';
 
 const duration = 100;
+var initialArr;
 
 class Game extends Component {
     constructor(props) {
@@ -12,7 +14,7 @@ class Game extends Component {
 
         const n = this.props.n
         const arr = constructCorrectArray(n);
-
+        initialArr = arr.map(x => x.slice());
         this.state = {
             n: n,
             arr: arr,
@@ -28,6 +30,15 @@ class Game extends Component {
         });
 
         swipeDetect(document, this.move.bind(this));
+    }
+
+    resetGame(e){
+        e.preventDefault();
+        this.setState({
+            arr: initialArr.map(x => x.slice()),
+            emptyCell: {x:0, y:0},
+            moves: 0
+        });
     }
 
     async move(direction) {
@@ -85,12 +96,16 @@ class Game extends Component {
             moves: this.state.moves + 1
         });
     }
+
     render() {
-        const { moves, arr } = this.state;
-        var { n } = this.props;
+        const { moves, arr, n } = this.state;
         return (
             <>
-                <div className="moves">Moves: {moves}</div>
+                <header>
+                    <div className="reset" onClick={this.resetGame.bind(this)} onTouchEndCapture={this.resetGame.bind(this)}><FaUndo /><span className="icon-text">Reset game</span></div>
+                    <div className="moves">Moves: {moves}</div>
+                    <div className="menu"><FaBars /><span className="icon-text">Menu</span></div>
+                </header>
                 <Board n={n} arr={arr} />
             </>
         )
