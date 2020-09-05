@@ -15,6 +15,8 @@ function shuffleArray(array) {
     }
 }
 
+const duration = 1000;
+
 class Board extends React.Component {
     constructor(props) {
         super(props);
@@ -63,7 +65,7 @@ class Board extends React.Component {
                     console.log("up");
                     id = arr[x + 1][y];
                     if (id === undefined) return;
-                    $(`#${id}`)[0].animate([{"top": "100%"}, {"top": "0%"}], 2000);
+                    $(`#${id}`)[0].animate([{"top": "100%"}, {"top": "0%"}], duration);
                     var temp = arr[x][y];
                     arr[x][y] = arr[x + 1][y];
                     arr[x + 1][y] = temp;
@@ -72,7 +74,7 @@ class Board extends React.Component {
                 case DIR.RIGHT:
                     id = arr[x][y - 1];
                     if (id === undefined) return;
-                    $(`#${id}`)[0].animate([{"left": "-100%"}, {"left": "0%"}], 2000);
+                    $(`#${id}`)[0].animate([{"left": "-100%"}, {"left": "0%"}], duration);
                     temp = arr[x][y];
                     arr[x][y] = arr[x][y - 1];
                     arr[x][y - 1] = temp;
@@ -82,7 +84,7 @@ class Board extends React.Component {
                     console.log("down");
                     id = arr[x - 1][y];
                     if (id === undefined) return;
-                    $(`#${id}`)[0].animate([{"top": "-100%"}, {"top": "0%"}], 2000);
+                    $(`#${id}`)[0].animate([{"top": "-100%"}, {"top": "0%"}], duration);
                     temp = arr[x][y];
                     arr[x][y] = arr[x - 1][y];
                     arr[x - 1][y] = temp;
@@ -92,7 +94,7 @@ class Board extends React.Component {
                     console.log("left");
                     id = arr[x][y + 1];
                     if (id === undefined) return;
-                    $(`#${id}`)[0].animate([{"left": `100%`}, {"left": "0%"}], 2000);
+                    $(`#${id}`)[0].animate([{"left": `100%`}, {"left": "0%"}], duration);
                     temp = arr[x][y];
                     arr[x][y] = arr[x][y + 1];
                     arr[x][y + 1] = temp;
@@ -120,8 +122,8 @@ class Board extends React.Component {
                 tab.push(<Square key={arr[i][j]} num={arr[i][j]} x={j} y={i} />);
             }
         }
-        $(".board-cell").css("left", "0%");
-        $(".board-cell").css("top", "0%");
+        // $(".board-cell").css("left", "0%");
+        // $(".board-cell").css("top", "0%");
         $("#0").css("background-color", "white");
         return <div className="board" style={style}> {tab} </div>;
     }
