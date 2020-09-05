@@ -4,6 +4,8 @@ import $ from 'jquery';
 import { DIR } from './utils';
 import { swipeDetect } from './swipeDetect';
 
+const duration = 100;
+
 window.$ = $;
 
 function shuffleArray(array) {
@@ -14,8 +16,6 @@ function shuffleArray(array) {
         array[j] = temp;
     }
 }
-
-const duration = 1000;
 
 class Board extends React.Component {
     constructor(props) {
