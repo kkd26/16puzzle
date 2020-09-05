@@ -3,6 +3,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior: none;
 }
 
 code {
@@ -10,13 +11,14 @@ code {
 }
 
 #root {
-    height: 100vh;
+    height: 80vh;
     display: flex;
 }
 
 .board {
-    flex-direction: column;
-    display: flex;
+    /* flex-direction: column; */
+    /* display: flex; */
+    display: grid;
     height: 50vh;
     width: 50vh;
     margin: auto;
@@ -29,10 +31,18 @@ code {
 }
 
 .board-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     position: relative;
     top: 0;
     left: 0;
-    transition: all 2s ease-in;
-    border: black solid;
+    transition: all 1s linear;
     width: 100%;
+    box-sizing: border-box;
+    font-size: 2em;
+    font-weight: bolder;
+    border: black solid;
+    background-color: #61DAFB;
 }
