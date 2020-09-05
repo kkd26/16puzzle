@@ -11,16 +11,22 @@ code {
 }
 
 #root {
-    height: 80vh;
+    height: 100vh;
     display: flex;
+    flex-direction: column;
+}
+
+.moves{
+    margin-top:1em;
+    font-size: 2em;
+    text-align: center;
 }
 
 .board {
-    /* flex-direction: column; */
-    /* display: flex; */
+    border:solid black;
     display: grid;
-    height: 50vh;
-    width: 50vh;
+    min-height: 50vh;
+    min-width: 50vh;
     margin: auto;
 }
 
@@ -34,15 +40,14 @@ code {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
     position: relative;
     top: 0;
     left: 0;
     transition: all 1s linear;
     width: 100%;
     box-sizing: border-box;
+    font-family: 'Fredoka One', cursive;
     font-size: 2em;
-    font-weight: bolder;
-    border: black solid;
+    /* font-weight: bolder; */
     background-color: #61DAFB;
 }

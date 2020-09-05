@@ -2,13 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import './index.css';
-import Board from './Board';
+import Game from './Game';
 import * as serviceWorker from './serviceWorker';
+
+window.$ = $;
 
 const n = 4;
 
 ReactDOM.render(
-    <Board n={n}/>,
+    <Game n={n}/>,
     document.getElementById('root')
 );
 
