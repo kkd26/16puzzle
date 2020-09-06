@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import Board from './Board';
 import { swipeDetect } from './swipeDetect';
 import { DIR, constructCorrectArray } from './utils';
-import { FaUndo, FaBars } from 'react-icons/fa';
+import { FaUndo } from 'react-icons/fa';
+import Menu from './Menu';
 
 const duration = 100;
 var initialArr;
@@ -28,15 +29,17 @@ class Game extends Component {
         $(document).keydown(async (e) => {
             await this.move(e.which);
         });
-
-        swipeDetect(document, this.move.bind(this));
     }
 
-    resetGame(e){
+    componentDidMount(){
+        swipeDetect($('.board')[0], this.move.bind(this));
+    }
+
+    resetGame(e) {
         e.preventDefault();
         this.setState({
             arr: initialArr.map(x => x.slice()),
-            emptyCell: {x:0, y:0},
+            emptyCell: { x: 0, y: 0 },
             moves: 0
         });
     }
@@ -102,11 +105,12 @@ class Game extends Component {
         return (
             <>
                 <header>
-                    <div className="reset" onClick={this.resetGame.bind(this)} onTouchEndCapture={this.resetGame.bind(this)}><FaUndo /><span className="icon-text">Reset game</span></div>
+                    <div className="reset icon-container" onClick={this.resetGame.bind(this)} onTouchEndCapture={this.resetGame.bind(this)}><FaUndo /><span className="desktop">Reset game</span></div>
                     <div className="moves">Moves: {moves}</div>
-                    <div className="menu"><FaBars /><span className="icon-text">Menu</span></div>
+                    <Menu name="Menu" classes="menu-button"/>
                 </header>
                 <Board n={n} arr={arr} />
+
             </>
         )
     }

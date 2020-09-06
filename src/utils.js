@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 export const DIR = {
     LEFT: 37,
     UP: 38,
@@ -28,7 +30,6 @@ const isEvenPermutation = (array) => {
             const [x2, y2] = [Math.floor(j / n), j % n];
             const toCheck = array[x2][y2];
             if (toCheck === 0) continue;
-            console.log(current, toCheck);
             if (current > toCheck) inversions++;
         }
     }
@@ -54,10 +55,15 @@ export const constructCorrectArray = (n) => {
     arr[0][0] = arr[x][y];
     arr[x][y] = temp;
     if (!isEvenPermutation(arr)) {
-        temp = arr[0][n-1];
-        arr[0][n-1] = arr[1][0];
+        temp = arr[0][n - 1];
+        arr[0][n - 1] = arr[1][0];
         arr[1][0] = temp;
     }
 
     return arr;
+}
+
+export const setMainColor = (mainColor) => {
+    localStorage.setItem("main-color", mainColor);
+    $(":root").css("--main-color", mainColor);
 }

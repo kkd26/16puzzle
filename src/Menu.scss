@@ -1,0 +1,39 @@
+.menu {
+    position: fixed;
+    left: 100%;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: var(--main-color);
+    transition: left ease-in-out 1s;
+    opacity: 0.9;
+    padding: 1rem;
+    font-size: 2rem;
+    z-index: 10;
+    & > .menu-list {
+        list-style: none;
+        padding-inline-start: 0;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-block-start: 3rem;
+        white-space: nowrap;
+        & > div{
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.open {
+    left: 0%;
+}
+
+@media only screen and (min-width: 768px){
+    .menu{
+        opacity: 1;
+        border-left: black solid;
+    }
+
+    .open{
+        left: 50%;
+    }
+}

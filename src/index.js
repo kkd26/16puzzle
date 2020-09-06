@@ -1,13 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import './index.css';
+import './index.scss';
 import Game from './Game';
 import * as serviceWorker from './serviceWorker';
+import { setMainColor } from './utils';
 
 window.$ = $;
 
 const n = 4;
+
+var mainColor = localStorage.getItem("main-color");
+if(mainColor === null || !mainColor){
+    mainColor = "#61DAFB";
+}
+
+setMainColor(mainColor);
 
 ReactDOM.render(
     <Game n={n}/>,

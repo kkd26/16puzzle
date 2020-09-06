@@ -2,10 +2,6 @@
     box-sizing: border-box;
 }
 
-:root{
-    --main-color: #61DAFB;
-}
-
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -19,9 +15,13 @@ code {
 }
 
 #root {
-    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 
 header{
@@ -34,17 +34,22 @@ header{
     background-color: var(--main-color);
 }
 
-.menu, .reset{
-    position: absolute;
-    padding: 0.5rem;
+.icon-container{
     cursor: pointer;
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: 1.5em;
+    width: fit-content;
+    user-select:none;
 }
 
-.menu{
+.menu-button, .reset{
+    position: absolute;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.menu-button{
     right: 1rem;
 }
 
@@ -55,12 +60,12 @@ header{
     border-radius: 20px;
 }
 
-.icon-text{
+.desktop{
     display: none;
 }
 
 @media only screen and (min-width: 768px){
-    .icon-text{
+    .desktop{
         display: initial;
     }
 
@@ -68,7 +73,7 @@ header{
         margin-right: .5rem;
     }
     
-    .menu > svg{
+    .menu-button > svg{
         margin-right: .5rem;
     }
 
@@ -82,7 +87,7 @@ header{
 }
 
 .moves{
-    font-size: 2em;
+    font-size: 2rem;
     text-align: center;
 }
 
@@ -111,6 +116,6 @@ header{
     width: 100%;
     box-sizing: border-box;
     font-family: 'Fredoka One', cursive;
-    font-size: 2em;
+    font-size: 2rem;
     background-color: var(--main-color);
 }
