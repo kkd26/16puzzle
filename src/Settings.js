@@ -23,6 +23,7 @@ class Settings extends Component {
                 color={this.state.color}
                 onChange={this.handleChange.bind(this)}
                 onChangeComplete={(x => setMainColor(x.hex))}
+                width="unset"
             />
             </>
         );
