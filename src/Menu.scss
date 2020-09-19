@@ -13,9 +13,10 @@
     & > .menu-list {
         list-style: none;
         padding-inline-start: 0;
-        margin-left: 10%;
+        margin-left: 5%;
         margin-right: 10%;
         margin-block-start: 3rem;
+        font-size: 1.5rem;
         white-space: nowrap;
         & > div{
             margin-bottom: 1rem;
@@ -25,6 +26,12 @@
 
 .open {
     left: 0%;
+}
+
+#board-size-input{
+    width: 100%;
+    padding: 0.3em;
+    font-size: inherit;
 }
 
 @media only screen and (min-width: 768px){

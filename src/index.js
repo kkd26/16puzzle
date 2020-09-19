@@ -4,21 +4,16 @@ import $ from 'jquery';
 import './index.scss';
 import Game from './Game';
 import * as serviceWorker from './serviceWorker';
-import { setMainColor } from './utils';
+import { getFromStorageOrDefault, setMainColor } from './utils';
 
 window.$ = $;
 
-const n = 4;
-
-var mainColor = localStorage.getItem("main-color");
-if(mainColor === null || !mainColor){
-    mainColor = "#61DAFB";
-}
+var mainColor = getFromStorageOrDefault('main-color');
 
 setMainColor(mainColor);
 
 ReactDOM.render(
-    <Game n={n}/>,
+    <Game />,
     document.getElementById('root')
 );
 

@@ -7,28 +7,33 @@ export const DIR = {
     DOWN: 40,
 }
 
-const shuffleArray = (array) => {
-    for (var i = array.length - 1; i > 0; i--) {
+const DEFAULTS = {
+    "main-color": "#61DAFB",
+    "board-size": 4
+}
+
+const shuffleArray = (arr) => {
+    for (var i = arr.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+        var temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 }
 
-const isEvenPermutation = (array) => {
+const isEvenPermutation = (arr) => {
     var inversions = 0;
-    const n = array.length;
+    const n = arr.length;
     for (var i = 0; i < n * n; i++) {
         const [x, y] = [Math.floor(i / n), i % n];
-        const current = array[x][y];
+        const current = arr[x][y];
         if (current === 0) {
             inversions += x;
             continue;
         }
         for (var j = i + 1; j < n * n; j++) {
             const [x2, y2] = [Math.floor(j / n), j % n];
-            const toCheck = array[x2][y2];
+            const toCheck = arr[x2][y2];
             if (toCheck === 0) continue;
             if (current > toCheck) inversions++;
         }
@@ -61,6 +66,21 @@ export const constructCorrectArray = (n) => {
     }
 
     return arr;
+}
+
+export const isSorted = (arr) => {
+    arr = arr.reduce((prev, cur) => prev.concat(cur), []);
+    var sorted = [...arr].sort((a, b) => a - b);
+    
+    return JSON.stringify(sorted) === JSON.stringify(arr);
+}
+
+export const getFromStorageOrDefault = (key) => {
+    var value = localStorage.getItem(key);
+    if (value === null || !value) {
+        value = DEFAULTS[key];
+    }
+    return value;
 }
 
 export const setMainColor = (mainColor) => {

@@ -5,6 +5,11 @@ import './Menu.scss';
 import Settings from './Settings';
 
 class Menu extends Component {
+    constructor(props){
+        super(props);
+
+        this.changeBoardSize = props.changeBoardSize;
+    }
 
     open(e) {
         const menu = $(e.target).closest('.icon-container').next('.menu');
@@ -26,7 +31,7 @@ class Menu extends Component {
                 <>
                     <Menu name="Start new game" />
                     <Menu name="Profile" />
-                    <Menu name="Settings" />
+                    <Menu name="Settings" changeBoardSize={this.changeBoardSize}/>
                 </>;
         }
         else if (name === "Start new game") {
@@ -38,7 +43,7 @@ class Menu extends Component {
                 </>;
         }
         else if (name === "Settings") {
-            content = <Settings />;
+            content = <Settings changeBoardSize={this.changeBoardSize}/>;
         }
         
         return (
