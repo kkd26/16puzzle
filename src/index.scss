@@ -1,18 +1,19 @@
-*{
+* {
     box-sizing: border-box;
-    user-select:none;
+    user-select: none;
 }
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+        "Droid Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overscroll-behavior: none;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 #root {
@@ -25,7 +26,7 @@ code {
     height: 100vh;
 }
 
-header{
+header {
     display: flex;
     flex-direction: row;
     position: relative;
@@ -35,65 +36,74 @@ header{
     background-color: var(--main-color);
 }
 
-.icon-container{
+.icon-container {
     cursor: pointer;
     display: flex;
     flex-direction: row;
     align-items: center;
     width: fit-content;
-    user-select:none;
+    user-select: none;
 }
 
-.menu-button, .reset{
+.menu-button,
+.reset {
     position: absolute;
     padding: 0.5rem;
     font-size: 1.5rem;
 }
 
-.menu-button{
+.menu-button {
     right: 1rem;
 }
 
-.reset{
+.reset {
     left: 1rem;
-    color:red;
+    color: red;
     font-weight: bold;
     border-radius: 20px;
 }
 
-.desktop{
+.desktop {
     display: none;
 }
 
-@media only screen and (min-width: 768px){
-    .desktop{
+.game-control-bar{
+    display: flex;
+    flex-direction: row;
+    padding: 30px 30%;
+    font-size: 2em;
+    justify-content: space-between;
+}
+
+@media only screen and (min-width: 768px) {
+    .desktop {
         display: initial;
     }
 
-    .reset > svg{
-        margin-right: .5rem;
-    }
-    
-    .menu-button > svg{
-        margin-right: .5rem;
+    .reset > svg {
+        margin-right: 0.5rem;
     }
 
-    .reset:hover{
+    .menu-button > svg {
+        margin-right: 0.5rem;
+    }
+
+    .reset:hover {
         background-color: red;
         color: var(--main-color);
-        transition: all ease-in-out .1s;
+        transition: all ease-in-out 0.1s;
         text-shadow: gray -1px -1px 2px;
         box-shadow: grey 1px 1px 2px 2px;
     }
 }
 
-.moves{
+.moves {
     font-size: 2rem;
     text-align: center;
 }
 
 .board {
-    border:solid black;
+    border: solid black;
     display: grid;
     min-height: 50vh;
     min-width: 50vh;
@@ -116,7 +126,7 @@ header{
     transition: all 1s linear;
     width: 100%;
     box-sizing: border-box;
-    font-family: 'Fredoka One', cursive;
+    font-family: "Fredoka One", cursive;
     font-size: 2rem;
     background-color: var(--main-color);
 }

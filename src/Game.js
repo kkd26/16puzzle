@@ -2,7 +2,7 @@ import $ from 'jquery';
 import React, { Component } from 'react';
 import Board from './Board';
 import { swipeDetect } from './swipeDetect';
-import { DIR, constructCorrectArray, getFromStorageOrDefault, isSorted } from './utils';
+import { DIR, constructCorrectArray, constructSortedArray, getFromStorageOrDefault, isSorted } from './utils';
 import { FaUndo } from 'react-icons/fa';
 import Menu from './Menu';
 
@@ -18,17 +18,14 @@ class Game extends Component {
     initialArr = arr.map(x => x.slice());
     this.state = {
       n: n,
-      arr: arr,
+      arr: constructSortedArray(n),
       emptyCell: {
         x: 0,
         y: 0
       },
       moves: 0
     }
-
-    $(document).on("keydown", async (e) => {
-      await this.move(e.which);
-    });
+    this.board = React.createRef();
   }
 
   componentDidMount() {
@@ -38,30 +35,38 @@ class Game extends Component {
   resetGame(e) {
     e.preventDefault();
     this.setState({
+      arr: constructSortedArray(this.state.n),
+      emptyCell: { x: 0, y: 0 },
+      moves: 0
+    });
+    this.board.current.resetGame();
+  }
+
+  createNewGame(n) {
+    this.board.current.resetGame();
+    const arr = constructCorrectArray(n);
+    initialArr = arr.map(x => x.slice());
+    this.setState({
+      n: n,
+      arr: constructSortedArray(n)
+    });
+  }
+
+  startCurrentGame() {
+    this.setState({
       arr: initialArr.map(x => x.slice()),
       emptyCell: { x: 0, y: 0 },
       moves: 0
     });
   }
 
-  startNewGame(n) {
-    const arr = constructCorrectArray(n);
-    initialArr = arr.map(x => x.slice());
-    this.setState({
-      n: n,
-      arr: arr,
-      emptyCell: {
-        x: 0,
-        y: 0
-      },
-      moves: 0
-    })
-  }
-
   checkWin(arr) {
     if (isSorted(arr)) {
-      alert("won");
+      this.board.current.pause();
+      $(document).off("keydown");
+      return true;
     }
+    return false;
   }
 
   async move(direction) {
@@ -128,12 +133,12 @@ class Game extends Component {
     });
     const tempArr = [...arr];
     if (keyFrame) await $(`#${id}`)[0].animate(keyFrame, duration).finished;
-    this.checkWin(tempArr);
 
-    $(document).on("keydown", async (e) => {
-      $(document).off("keydown");
-      await this.move(e.which);
-    });
+    if (!this.checkWin(tempArr)) {
+      $(document).on("keydown", async (e) => {
+        await this.move(e.which);
+      });
+    }
   }
 
   render() {
@@ -141,11 +146,16 @@ class Game extends Component {
     return (
       <>
         <header>
-          <div className="reset icon-container" onClick={this.resetGame.bind(this)} onTouchEndCapture={this.resetGame.bind(this)}><FaUndo /><span className="desktop">Reset game</span></div>
+          <div className="reset icon-container" onClick={this.resetGame.bind(this)} onTouchEndCapture={this.resetGame.bind(this)}>
+            <FaUndo />
+            <span className="desktop">Reset game</span>
+          </div>
           <div className="moves">Moves: {moves}</div>
-          <Menu name="Menu" classes="menu-button" changeBoardSize={this.startNewGame.bind(this)} />
+          <Menu name="Menu" classes="menu-button" changeBoardSize={this.createNewGame.bind(this)} />
         </header>
-        <Board n={n} arr={arr} />
+        <Board ref={this.board} n={n} arr={arr}
+          startCurrentGame={this.startCurrentGame.bind(this)} 
+          move={this.move.bind(this)}/>
       </>
     )
   }

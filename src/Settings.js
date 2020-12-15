@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HuePicker, SliderPicker } from 'react-color';
+import { SliderPicker } from 'react-color';
 import { setMainColor } from './utils';
 import $ from 'jquery';
 
