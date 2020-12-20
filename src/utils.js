@@ -77,10 +77,10 @@ export const constructCorrectArray = (n) => {
 }
 
 export const isSorted = (arr) => {
-  arr = arr.reduce((prev, cur) => prev.concat(cur), []);
-  var sorted = [...arr].sort((a, b) => a - b);
+  const spread = arr.reduce((prev, cur) => prev.concat(cur), []);
+  const sorted = [...arr].sort((a, b) => a - b);
 
-  return JSON.stringify(sorted) === JSON.stringify(arr);
+  return JSON.stringify(sorted) === JSON.stringify(spread);
 }
 
 export const getFromStorageOrDefault = (key) => {

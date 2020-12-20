@@ -71,70 +71,48 @@ class Game extends Component {
 
   async move(direction) {
     $(document).off("keydown");
-    var arr = this.state.arr;
-    var { x, y } = this.state.emptyCell;
-    var id;
-    var keyFrame = undefined;
-    try {
-      switch (direction) {
-        case DIR.UP:
-          id = arr[x + 1][y];
-          if (id === undefined) throw new Error();
-          keyFrame = [{ "top": "100%" }, { "top": "0%" }];
-
-          var temp = arr[x][y];
-          arr[x][y] = arr[x + 1][y];
-          arr[x + 1][y] = temp;
-          x++;
-          break;
-        case DIR.RIGHT:
-          id = arr[x][y - 1];
-          if (id === undefined) throw new Error();
-          keyFrame = [{ "left": "-100%" }, { "left": "0%" }];
-
-          temp = arr[x][y];
-          arr[x][y] = arr[x][y - 1];
-          arr[x][y - 1] = temp;
-          y--;
-          break;
-        case DIR.DOWN:
-          id = arr[x - 1][y];
-          if (id === undefined) throw new Error();
-          keyFrame = [{ "top": "-100%" }, { "top": "0%" }];
-
-          temp = arr[x][y];
-          arr[x][y] = arr[x - 1][y];
-          arr[x - 1][y] = temp;
-          x--;
-          break;
-        case DIR.LEFT:
-          id = arr[x][y + 1];
-          if (id === undefined) throw new Error();
-          keyFrame = [{ "left": `100%` }, { "left": "0%" }];
-
-          temp = arr[x][y];
-          arr[x][y] = arr[x][y + 1];
-          arr[x][y + 1] = temp;
-          y++;
-          break;
-        default:
-          throw new Error();
-      }
-    } catch (err) {
+    let {arr, emptyCell: {x, y}} = this.state;
+    let step;
+    let keyFrame;
+    switch (direction) {
+      case DIR.UP:
+        step = {x:1, y:0};
+        keyFrame = [{ "top": "100%" }, { "top": "0%" }];
+        break;
+      case DIR.DOWN:
+        step = {x:-1, y:0};
+        keyFrame = [{ "top": "-100%" }, { "top": "0%" }];
+        break;
+      case DIR.RIGHT:
+        step = {x:0, y:-1};
+        keyFrame = [{ "left": "-100%" }, { "left": "0%" }];
+        break;
+      case DIR.LEFT:
+        step = {x:0, y:1};
+        keyFrame = [{ "left": `100%` }, { "left": "0%" }];
+        break;
+    }
+    const nx = x + step.x;
+    const ny = y + step.y;
+    const nid = arr[nx][ny];
+    if (nid === undefined) {
       $(document).on("keydown", async (e) => {
         await this.move(e.which);
       });
       return;
     }
+
+    arr[nx][ny] = arr[x][y];
+    arr[x][y] = nid;
+    
     this.setState({
-      emptyCell: { x, y },
-      arr: arr,
+      emptyCell: { nx, ny },
+      arr,
       moves: this.state.moves + 1
     });
-    const tempArr = [...arr];
-    if (keyFrame) await $(`#${id}`)[0].animate(keyFrame, duration).finished;
+    await $(`#${id}`)[0].animate(keyFrame, duration).finished;
 
-    if (!this.checkWin(tempArr)) {
+    if (!this.checkWin(arr)) {
       $(document).on("keydown", async (e) => {
         await this.move(e.which);
       });
