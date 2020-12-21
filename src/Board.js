@@ -11,24 +11,21 @@ class Board extends Component {
     this.startCurrentGame = props.startCurrentGame;
     this.move = props.move;
     this.state = {
-      running: false,
-      started: false
+      started: false,
+      running: false
     };
   }
 
-  start(){
+  start() {
     this.startCurrentGame();
-    $(document).on("keydown", async (e) => {
-      await this.move(e.which);
-    });
     this.stopwatch.current.start();
     this.setState({
-      running: true,
-      started: true
+      started: true,
+      running: true
     });
   }
 
-  pause(){
+  pause() {
     $(document).off("keydown");
     this.stopwatch.current.stop();
     this.setState({
@@ -36,7 +33,7 @@ class Board extends Component {
     });
   }
 
-  resume(){
+  resume() {
     $(document).on("keydown", async (e) => {
       await this.move(e.which);
     });
@@ -46,20 +43,18 @@ class Board extends Component {
     });
   }
 
-  resetGame(){
-    $(document).off("keydown");
+  resetGame() {
     this.stopwatch.current.stop();
     this.stopwatch.current.reset();
     this.setState({
-      running: false,
-      started: false
+      started: false,
+      running: false
     });
   }
 
   render() {
     const { n, arr } = this.props;
-    const running = this.state.running;
-    const started = this.state.started;
+    const { started, running } = this.state;
     const text = started ? (running ? "Pause" : "Resume") : "Start";
     const onClickHandler = started ? (running ? this.pause : this.resume) : this.start;
 
@@ -78,10 +73,10 @@ class Board extends Component {
             <span>{text} Game</span>
           </div>
           <div>
-          <div className="icon-container">
-            <FaStopwatch />
-            <Stopwatch ref={this.stopwatch}/>
-          </div>
+            <div className="icon-container">
+              <FaStopwatch />
+              <Stopwatch ref={this.stopwatch} />
+            </div>
           </div>
         </div>
         <main className="board" style={style}> {tab} </main>

@@ -18,7 +18,7 @@
         margin-block-start: 3rem;
         font-size: 1.5rem;
         white-space: nowrap;
-        & > div{
+        & > div {
             margin-bottom: 1rem;
         }
     }
@@ -28,19 +28,19 @@
     left: 0%;
 }
 
-#board-size-input{
+#board-size-input {
     width: 100%;
     padding: 0.3em;
     font-size: inherit;
 }
 
-@media only screen and (min-width: 768px){
-    .menu{
+@media only screen and (min-width: 768px) {
+    .menu {
         opacity: 1;
         border-left: black solid;
     }
 
-    .open{
+    .open {
         left: 50%;
     }
 }
