@@ -39,8 +39,7 @@ class Game extends Component {
       arr: constructSortedArray(this.state.n),
       emptyCell: { x: 0, y: 0 },
       moves: 0
-    });
-    this.board.current.resetGame();
+    }, () => this.board.current.resetGame());
   }
 
   /**
@@ -50,9 +49,9 @@ class Game extends Component {
   createNewGame(n) {
     initialArr = constructCorrectArray(n);
     this.setState({
-      n: n
-    });
-    this.resetGame(new Event(""));
+      n: n,
+      arr: constructSortedArray(n)
+    }, () => this.resetGame(new Event("")));
   }
 
   /**
